@@ -1,0 +1,11 @@
+libraw1394: libraw1394 (A Linux IEEE 1394 a.k.a FireWire library)
+libraw1394:
+libraw1394: libraw1394 is the only supported interface to the kernel side
+libraw1394: raw1394 of the Linux IEEE-1394 subsystem, which provides direct
+libraw1394: access to the connected 1394 buses to user space.
+libraw1394:
+libraw1394:
+libraw1394:
+libraw1394:
+libraw1394: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+libraw1394:
