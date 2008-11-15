@@ -7,7 +7,7 @@
 . ../slack-package.conf
 
 NAME=libraw1394
-VERSION=1.2.1
+VERSION=1.3.0
 BUILD=1
 
 cd $TMP
@@ -21,15 +21,16 @@ CXXFLAGS=$SLKCFLAGS \
 ./configure --build=$ARCH-slackware-linux \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
-	    --enable-shared=yes \
-	    --enable-static=no
+            --mandir=/usr/man \
+            --enable-shared=yes \
+            --enable-static=no || exit 1
 
-make all || exit 1 
+make -j4 all || exit 2
 
 PKG="$TMP/package-$NAME"
 mkdir -p $PKG
 
-make DESTDIR=$PKG install
+make DESTDIR=$PKG install || exit 3
 
 bin_perms $PKG
 gzip_man $PKG
@@ -39,12 +40,14 @@ DOCFILES="$DOCFILES COPYING.LIB"
 mv $PKG/usr/doc/$NAME-$VERSION/COPYING.LIB $PKG/usr/doc/$NAME-$VERSION/COPYING 
 
 mkdir -p $PKG/install
-install -m 644 $CWD/slack-desc $PKG/install/slack-desc
-install -m 644 $CWD/doinst.sh  $PKG/install/doinst.sh
+install -m 644 $CWD/doinst.sh      $PKG/install/doinst.sh
+install -m 644 $CWD/slack-desc     $PKG/install/slack-desc
+install -m 644 $CWD/slack-required $PKG/install/slack-required
 
 mkdir -p $PKG/usr/src/slackbuilds/$NAME-$VERSION
-install -m 644 $CWD/slack-desc       $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
 install -m 644 $CWD/doinst.sh        $PKG/usr/src/slackbuilds/$NAME-$VERSION/doinst.sh
+install -m 644 $CWD/slack-desc       $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-desc
+install -m 644 $CWD/slack-required   $PKG/usr/src/slackbuilds/$NAME-$VERSION/slack-required
 install -m 644 $CWD/$NAME.SlackBuild $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NAME.SlackBuild
 
 cd $PKG
