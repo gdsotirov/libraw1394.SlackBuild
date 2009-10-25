@@ -8,7 +8,7 @@
 
 NAME=libraw1394
 VERSION=2.0.2
-BUILD=1
+BUILD=2
 
 cd $TMP
 tar -zxvf $CWD/$NAME-$VERSION.tar.gz
@@ -23,7 +23,8 @@ CXXFLAGS=$SLKCFLAGS \
             --prefix=/usr \
             --mandir=/usr/man \
             --enable-shared=yes \
-            --enable-static=no || exit 1
+            --enable-static=no \
+	    --with-valgrind || exit 1
 
 make -j4 all || exit 2
 
@@ -33,11 +34,11 @@ mkdir -p $PKG
 make DESTDIR=$PKG install || exit 3
 
 bin_perms $PKG
-gzip_man $PKG
 ( cd $PKG; strip_bin; strip_lib )
 DOCFILES="$DOCFILES COPYING.LIB"
 ( cd $SRC; create_docs $PKG $NAME-$VERSION )
 mv $PKG/usr/doc/$NAME-$VERSION/COPYING.LIB $PKG/usr/doc/$NAME-$VERSION/COPYING 
+gzip_man $PKG
 
 mkdir -p $PKG/install
 install -m 644 $CWD/doinst.sh      $PKG/install/doinst.sh
@@ -52,9 +53,9 @@ install -m 644 $CWD/$NAME.SlackBuild $PKG/usr/src/slackbuilds/$NAME-$VERSION/$NA
 
 cd $PKG
 PKGNAME=$NAME-$VERSION-$ARCH-$BUILD$MYIN
-makepkg -l y -c n -p $PKG_DIR/$PKGNAME.tgz
+makepkg -l y -c n -p $PKG_DIR/$PKGNAME.txz
 cd $PKG_DIR
-md5sum $PKGNAME.tgz > $PKGNAME.tgz.md5
+md5sum $PKGNAME.txz > $PKGNAME.txz.md5
 cat $PKG/install/slack-desc > $PKG_DIR/$PKGNAME.txt
 
 if [ "$1" == "--cleanup" ]; then
