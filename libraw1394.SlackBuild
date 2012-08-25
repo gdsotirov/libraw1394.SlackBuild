@@ -1,11 +1,26 @@
 #!/bin/sh
 #
-# SlackBuild for libraw1394
-# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-# Visit SlackPack at http://sotirov-bg.net/slackpack/
+# Slackware build script for LibRaw1394
+# Copyright (C) 2007-2010,2012 Georgi D. Sotirov <gdsotirov@dir.bg>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# 
+# $Id: libraw1394.SlackBuild,v 1.6 2012/08/25 12:02:04 gsotirov Exp $
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=libraw1394
 VERSION=2.0.5
