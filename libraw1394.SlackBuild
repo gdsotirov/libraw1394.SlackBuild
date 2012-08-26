@@ -17,13 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # 
-# $Id: libraw1394.SlackBuild,v 1.6 2012/08/25 12:02:04 gsotirov Exp $
+# $Id: libraw1394.SlackBuild,v 1.7 2012/08/26 16:18:28 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=libraw1394
-VERSION=2.0.5
+VERSION=2.0.9
 BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
@@ -48,7 +48,7 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -xvf $CWD/$NAME-$VERSION.tar.gz || exit 1
+tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 1
 cd $SRC fix_source
 
 CFLAGS=$SLKCFLAGS \
