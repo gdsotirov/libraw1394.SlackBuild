@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for LibRaw1394
-# Copyright (C) 2007-2014 Georgi D. Sotirov <gdsotirov@dir.bg>
+# Copyright (C) 2007-2015 Georgi D. Sotirov <gdsotirov@dir.bg>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,13 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # 
-# $Id: libraw1394.SlackBuild,v 1.9 2014/08/24 16:55:47 gsotirov Exp $
+# $Id: libraw1394.SlackBuild,v 1.10 2015/05/23 17:03:50 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=libraw1394
-VERSION=2.1.0
+VERSION=2.1.1
 BUILD=${BUILD:-1}
 
 TMP=${TMP:-/tmp}
@@ -48,7 +48,7 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 1
+tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 3
 cd $SRC fix_source
 
 CFLAGS=$SLKCFLAGS \
@@ -60,11 +60,11 @@ CXXFLAGS=$SLKCFLAGS \
             --mandir=/usr/man \
             --enable-shared=yes \
             --enable-static=no \
-	    --with-valgrind || exit 1
+	    --with-valgrind || exit 4
 
 # Build & install
-make -j4 all || exit 2
-make DESTDIR=$PKG install || exit 3
+make -j4 all || exit 5
+make DESTDIR=$PKG install || exit 6
 
 # Prepare
 bin_perms $PKG
